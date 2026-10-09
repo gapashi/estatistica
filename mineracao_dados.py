@@ -12,4 +12,8 @@ dados = {
 }
 
 df = pd.DataFrame(dados)
-print(df)
+
+df = df.dropna()
+df = df.drop_duplicates()
+print(df.describe())
+print(df.info())
