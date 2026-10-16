@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 dados = {
     'ID': range(1, 21),
@@ -15,5 +17,17 @@ df = pd.DataFrame(dados)
 
 df = df.dropna()
 df = df.drop_duplicates()
-print(df.describe())
-print(df.info())
+# print(df.describe())
+# print(df.info())
+
+# sns.boxplot(x=df["Salário"])
+# plt.title("Boxplot de Salários")
+# plt.show()
+
+# sns.boxplot(x=df["Idade"])
+# plt.title("Boxplot de Idades")
+# plt.show()
+
+df = df[df.loc[:, "Salário"] <= 150000]
+df.loc[:, "Idade"] = df["Idade"].apply(lambda x: np.nan if x > 100 else x)
+df.loc[:, "Idade"].fillna(df["Idade"].mean(), inplace=True)
